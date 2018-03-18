@@ -79,6 +79,25 @@ TEST(GildedRoseTest, brie_after_sell_date_with_max_quality) {
   EXPECT_EQ(50, items[0].quality);
 }
 
+TEST(GildedRoseTest, sulfuras_before_sell_date) {
+
+  auto items = UpdateQualityForItemWith(5, 80, "Sulfuras, Hand of Ragnaros", 0);
+  EXPECT_EQ(80, items[0].quality);
+}
+
+TEST(GildedRoseTest, sulfuras_on_sell_date) {
+
+  auto items = UpdateQualityForItemWith(0, 80, "Sulfuras, Hand of Ragnaros", 0);
+  EXPECT_EQ(80, items[0].quality);
+}
+
+TEST(GildedRoseTest, sulfuras_after_sell_date) {
+
+  auto items =
+      UpdateQualityForItemWith(-10, 80, "Sulfuras, Hand of Ragnaros", 0);
+  EXPECT_EQ(80, items[0].quality);
+}
+
 void example() {
   vector<Item> items;
   items.push_back(Item("+5 Dexterity Vest", 10, 20));
