@@ -20,4 +20,6 @@ public:
   void updateQuality();
 private:
     bool isSpecialItem(const Item& item) const;
+
+    void updateNormalItem(Item &item) const;
 };
