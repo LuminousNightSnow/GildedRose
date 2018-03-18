@@ -21,8 +21,6 @@ int main()
     items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
     items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 10, 49));
     items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 5, 49));
-    // this Conjured item doesn't yet work properly
-    items.push_back(Item("Conjured Mana Cake", 3, 6));
     GildedRose app(items);
 
     cout << "OMGHAI!" << endl;

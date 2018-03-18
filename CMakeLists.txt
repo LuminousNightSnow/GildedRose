@@ -5,6 +5,8 @@ project(cpp)
 #find_package(Threads REQUIRED)
 set(CMAKE_THREAD_LIBS_INIT pthread)
 
+set(CMAKE_CXX_STANDARD 17)
+
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
 set(gtest_SOURCE_DIR ${EXT_PROJECTS_DIR}/googletest/googletest)
 
