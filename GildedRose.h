@@ -18,4 +18,6 @@ public:
   GildedRose(vector<Item> &items);
 
   void updateQuality();
+private:
+    bool isSpecialItem(const Item& item) const;
 };
