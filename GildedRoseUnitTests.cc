@@ -2,16 +2,6 @@
 
 #include "GildedRose.h"
 
-// def update_quality_for_item_with(sell_in,
-//                                 quality,
-//                                 name             = 'normal item',
-//                                 sell_in_decrease = 1)
-//
-// item = Item.new(name, sell_in, quality)
-// update_quality([item])
-// assert_equal item.sell_in, sell_in - sell_in_decrease
-//        item
-
 vector<Item> UpdateQualityForItemWith(int sell_in, int quality,
                                       string name = "normal item",
                                       int sell_in_decrease = 1) {
@@ -45,6 +35,48 @@ TEST(GildedRoseTest, normal_item_of_zero_quality) {
 
   auto items = UpdateQualityForItemWith(5, 0, "normal");
   EXPECT_EQ(0, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_before_sell_date) {
+
+  auto items = UpdateQualityForItemWith(5, 10, "Aged Brie");
+  EXPECT_EQ(11, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_before_sell_date_with_max_quality) {
+
+  auto items = UpdateQualityForItemWith(5, 50, "Aged Brie");
+  EXPECT_EQ(50, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_on_sell_date) {
+
+  auto items = UpdateQualityForItemWith(0, 10, "Aged Brie");
+  EXPECT_EQ(12, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_on_sell_date_near_max_quality) {
+
+  auto items = UpdateQualityForItemWith(5, 49, "Aged Brie");
+  EXPECT_EQ(50, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_on_sell_date_with_max_quality) {
+
+  auto items = UpdateQualityForItemWith(5, 50, "Aged Brie");
+  EXPECT_EQ(50, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_after_sell_date) {
+
+  auto items = UpdateQualityForItemWith(-10, 10, "Aged Brie");
+  EXPECT_EQ(12, items[0].quality);
+}
+
+TEST(GildedRoseTest, brie_after_sell_date_with_max_quality) {
+
+  auto items = UpdateQualityForItemWith(-10, 50, "Aged Brie");
+  EXPECT_EQ(50, items[0].quality);
 }
 
 void example() {
