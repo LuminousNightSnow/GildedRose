@@ -24,5 +24,7 @@ class GildedRose
     bool isSpecialItem(const Item& item) const;
 
     void updateNormalItem(Item& item) const;
-    void updateAgedBrie(Item &item) const;
+    void updateAgedBrie(Item& item) const;
+    void updateSulfuras(Item& item) const;
+    void updateBackstagePass(Item& item) const;
 };
