@@ -25,7 +25,7 @@ void GildedRose::updateQuality()
 
                 if (items[i].name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (items[i].sellIn < 11)
+                    if (items[i].days_remaining < 11)
                     {
                         if (items[i].quality < 50)
                         {
@@ -33,7 +33,7 @@ void GildedRose::updateQuality()
                         }
                     }
 
-                    if (items[i].sellIn < 6)
+                    if (items[i].days_remaining < 6)
                     {
                         if (items[i].quality < 50)
                         {
@@ -46,10 +46,10 @@ void GildedRose::updateQuality()
 
         if (items[i].name != "Sulfuras, Hand of Ragnaros")
         {
-            items[i].sellIn = items[i].sellIn - 1;
+            items[i].days_remaining = items[i].days_remaining - 1;
         }
 
-        if (items[i].sellIn < 0)
+        if (items[i].days_remaining < 0)
         {
             if (items[i].name != "Aged Brie")
             {

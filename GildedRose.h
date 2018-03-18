@@ -3,21 +3,19 @@
 
 using namespace std;
 
-class Item
-{
+class Item {
 public:
-    string name;
-    int sellIn;
-    int quality;
-    Item(string name, int sellIn, int quality) : name(name), sellIn(sellIn), quality(quality)
-    {}
+  string name;
+  int days_remaining;
+  int quality;
+  Item(string name, int days_remaining, int quality)
+      : name(name), days_remaining(days_remaining), quality(quality) {}
 };
 
-class GildedRose
-{
+class GildedRose {
 public:
-    vector<Item> & items;
-    GildedRose(vector<Item> & items);
+  vector<Item> &items;
+  GildedRose(vector<Item> &items);
 
-    void updateQuality();
+  void updateQuality();
 };

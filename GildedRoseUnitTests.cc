@@ -9,7 +9,7 @@ vector<Item> UpdateQualityForItemWith(int sell_in, int quality,
   vector<Item> items{item};
   GildedRose app(items);
   app.updateQuality();
-  EXPECT_EQ(items[0].sellIn, sell_in - sell_in_decrease);
+  EXPECT_EQ(items[0].days_remaining, sell_in - sell_in_decrease);
   return items;
 }
 
