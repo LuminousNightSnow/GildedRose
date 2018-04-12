@@ -1,5 +1,6 @@
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 using namespace std;
@@ -11,7 +12,10 @@ class Item
     int days_remaining;
     int quality;
 
-    Item(string name, int days_remaining, int quality) : name(name), days_remaining(days_remaining), quality(quality) {}
+    Item(string name, int days_remaining, int quality)
+        : name(std::move(name)), days_remaining(days_remaining), quality(quality)
+    {
+    }
 
     virtual void update() = 0;
 
@@ -60,5 +64,4 @@ class GildedRose
     GildedRose(ItemContainer& items);
 
     void updateQuality();
-
 };
