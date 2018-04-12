@@ -65,3 +65,5 @@ class GildedRose
 
     void updateQuality();
 };
+
+ItemPointer ItemFactory(int days_remaining, int quality, string name = "normal item");

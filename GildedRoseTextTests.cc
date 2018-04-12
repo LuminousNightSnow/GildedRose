@@ -4,30 +4,34 @@
 
 using namespace std;
 
-ostream &operator<<(ostream &s, Item &item) {
+ostream& operator<<(ostream& s, Item& item)
+{
     s << item.name << ", " << item.days_remaining << ", " << item.quality;
     return s;
 }
 
-int main() {
-    vector<Item> items;
-    items.push_back(Item("+5 Dexterity Vest", 10, 20));
-    items.push_back(Item("Aged Brie", 2, 0));
-    items.push_back(Item("Elixir of the Mongoose", 5, 7));
-    items.push_back(Item("Sulfuras, Hand of Ragnaros", 0, 80));
-    items.push_back(Item("Sulfuras, Hand of Ragnaros", -1, 80));
-    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
-    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 10, 49));
-    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 5, 49));
+int main()
+{
+    ItemContainer items;
+    items.push_back(ItemFactory(10, 20, "+5 Dexterity Vest"));
+    items.push_back(ItemFactory(2, 0, "Aged Brie"));
+    items.push_back(ItemFactory(5, 7, "Elixir of the Mongoose"));
+    items.push_back(ItemFactory(0, 80, "Sulfuras, Hand of Ragnaros"));
+    items.push_back(ItemFactory(-1, 80, "Sulfuras, Hand of Ragnaros"));
+    items.push_back(ItemFactory(15, 20, "Backstage passes to a TAFKAL80ETC concert"));
+    items.push_back(ItemFactory(10, 49, "Backstage passes to a TAFKAL80ETC concert"));
+    items.push_back(ItemFactory(5, 49, "Backstage passes to a TAFKAL80ETC concert"));
     GildedRose app(items);
 
     cout << "OMGHAI!" << endl;
 
-    for (int day = 0; day <= 30; day++) {
+    for (int day = 0; day <= 30; day++)
+    {
         cout << "-------- day " << day << " --------" << endl;
         cout << "name, days remaining, quality" << endl;
-        for (vector<Item>::iterator i = items.begin(); i != items.end(); i++) {
-            cout << *i << endl;
+        for (auto item : items)
+        {
+            cout << *item << endl;
         }
         cout << endl;
 
