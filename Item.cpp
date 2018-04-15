@@ -3,11 +3,6 @@
 void NormalItem::Update()
 {
     DecreaseDaysRemaining();
-    if (GetQuality() == 0)
-    {
-        return;
-    }
-
     DecreaseQuality(1);
     if (GetDaysRemaining_() <= 0)
     {
@@ -18,11 +13,6 @@ void NormalItem::Update()
 void AgedBrieItem::Update()
 {
     DecreaseDaysRemaining();
-    if (GetQuality() >= 50)
-    {
-        return;
-    }
-
     IncreaseQuality(1);
     if (GetDaysRemaining_() <= 0)
     {
@@ -32,6 +22,7 @@ void AgedBrieItem::Update()
 
 void SulfurasItem::Update()
 {
+    // Item does not decay, so intentionally do nothing
 }
 
 void BackstageItem::Update()
@@ -42,36 +33,40 @@ void BackstageItem::Update()
         SetQualityToMin();
         return;
     }
-    if (GetQuality() >= 50)
+    if (GetQuality() >= max_quality_)
     {
         return;
     }
 
     IncreaseQuality(1);
 
-    if (GetDaysRemaining_() < 10)
+    if (GetDaysRemaining_() < close_to_sell_date)
     {
         IncreaseQuality(1);
     }
-    if (GetDaysRemaining_() < 5)
+    if (GetDaysRemaining_() < very_close_to_sell_date)
     {
         IncreaseQuality(1);
     }
 }
 
-void Item::IncreaseQuality(int value) {
+void Item::IncreaseQuality(int value)
+{
 
-    quality_  = std::min(quality_+= value, max_quality_);
+    quality_ = std::min(quality_ += value, max_quality_);
 }
 
-void Item::DecreaseQuality(int value) {
+void Item::DecreaseQuality(int value)
+{
     quality_ = std::max(quality_ -= value, min_quality_);
 }
 
-void Item::DecreaseDaysRemaining() {
+void Item::DecreaseDaysRemaining()
+{
     days_remaining_ -= 1;
 }
 
-void Item::SetQualityToMin() {
+void Item::SetQualityToMin()
+{
     quality_ = min_quality_;
 }

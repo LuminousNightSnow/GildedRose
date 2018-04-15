@@ -25,9 +25,11 @@ class Item
     void DecreaseQuality(int value);
     void SetQualityToMin();
 
-  private:
+  protected:
     const int max_quality_;
     const int min_quality_{0};
+
+  private:
     const std::string name_;
     int days_remaining_;
     int quality_;
@@ -68,6 +70,10 @@ class BackstageItem : public Item
     }
 
     void Update() override;
+
+  private:
+    const int close_to_sell_date{10};
+    const int very_close_to_sell_date{5};
 };
 
 #endif  // CPP_ITEM_H

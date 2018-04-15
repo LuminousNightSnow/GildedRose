@@ -10,7 +10,7 @@ ItemContainer UpdateQualityForItemWith(int days_remaining,
     ItemPointer item;
     if (name == "Aged Brie")
     {
-        item.reset(new AgedBrieItem{name, days_remaining, quality});
+        item.reset(new AgedBrieItem{name, days_remaining, quality, 50});
     }
     else if (name == "Sulfuras, Hand of Ragnaros")
     {
@@ -53,7 +53,6 @@ TEST(GildedRoseTest, normal_item_after_sell_date)
     auto items = UpdateQualityForItemWith(-10, 10);
     EXPECT_EQ(8, items[0]->GetQuality());
 }
-
 
 TEST(GildedRoseTest, normal_item_at_sell_date_quality_one)
 {
@@ -202,7 +201,6 @@ TEST(GildedRoseTest, backstage_pass_very_close_to_sell_date_max_quality)
     EXPECT_EQ(50, items[0]->GetQuality());
 }
 
-
 TEST(GildedRoseTest, backstage_pass_close_to_sell_date_max_quality)
 {
 
@@ -230,17 +228,3 @@ TEST(GildedRoseTest, backstage_pass_after_sell_date)
     auto items = UpdateQualityForItemWith(-10, 10, "Backstage passes to a TAFKAL80ETC concert");
     EXPECT_EQ(0, items[0]->GetQuality());
 }
-//
-// void example()
-//{
-//    vector<Item> items;
-//    items.push_back(Item("+5 Dexterity Vest", 10, 20));
-//    items.push_back(Item("Aged Brie", 2, 0));
-//    items.push_back(Item("Elixir of the Mongoose", 5, 7));
-//    items.push_back(Item("Sulfuras, Hand of Ragnaros", 0, 80));
-//    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 15,
-//    20));
-//    items.push_back(Item("Conjured Mana Cake", 3, 6));
-//    GildedRose app(items);
-//    app.updateQuality();
-//}
