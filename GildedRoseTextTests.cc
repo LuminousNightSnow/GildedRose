@@ -13,14 +13,14 @@ ostream& operator<<(ostream& s, Item& item)
 int main()
 {
     ItemContainer items;
-    items.push_back(ItemFactory(10, 20, "+5 Dexterity Vest"));
-    items.push_back(ItemFactory(2, 0, "Aged Brie"));
-    items.push_back(ItemFactory(5, 7, "Elixir of the Mongoose"));
-    items.push_back(ItemFactory(0, 80, "Sulfuras, Hand of Ragnaros"));
-    items.push_back(ItemFactory(-1, 80, "Sulfuras, Hand of Ragnaros"));
-    items.push_back(ItemFactory(15, 20, "Backstage passes to a TAFKAL80ETC concert"));
-    items.push_back(ItemFactory(10, 49, "Backstage passes to a TAFKAL80ETC concert"));
-    items.push_back(ItemFactory(5, 49, "Backstage passes to a TAFKAL80ETC concert"));
+    items.push_back(ItemFactory<NormalItem>(10, 20, "+5 Dexterity Vest"));
+    items.push_back(ItemFactory<AgedBrieItem>(2, 0, "Aged Brie"));
+    items.push_back(ItemFactory<NormalItem>(5, 7, "Elixir of the Mongoose"));
+    items.push_back(ItemFactory<SulfurasItem>(0, 80, "Sulfuras, Hand of Ragnaros"));
+    items.push_back(ItemFactory<SulfurasItem>(-1, 80, "Sulfuras, Hand of Ragnaros"));
+    items.push_back(ItemFactory<BackstageItem>(15, 20, "Backstage passes to a TAFKAL80ETC concert"));
+    items.push_back(ItemFactory<BackstageItem>(10, 49, "Backstage passes to a TAFKAL80ETC concert"));
+    items.push_back(ItemFactory<BackstageItem>(5, 49, "Backstage passes to a TAFKAL80ETC concert"));
     GildedRose app(items);
 
     cout << "OMGHAI!" << endl;

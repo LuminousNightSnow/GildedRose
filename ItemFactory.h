@@ -7,5 +7,9 @@
 using ItemPointer = std::shared_ptr<Item>;
 using ItemContainer = std::vector<ItemPointer>;
 
-ItemPointer ItemFactory(int days_remaining, int quality, std::string name);
+template<typename Item_T>
+ItemPointer ItemFactory(int days_remaining, int quality, std::string name)
+{
+    return ItemPointer(new Item_T{name, days_remaining, quality});
+}
 #endif //CPP_ITEMFACTORY_H

@@ -4,7 +4,7 @@
 
 ItemContainer UpdateQualityForItemWith(int days_remaining,
                                        int quality,
-                                       string name = "normal item",
+                                       std::string name = "normal item",
                                        int sell_in_decrease = 1)
 {
     ItemPointer item;
@@ -185,6 +185,21 @@ TEST(GildedRoseTest, backstage_pass_very_close_to_sell_date_lower_bound)
 
     auto items = UpdateQualityForItemWith(1, 10, "Backstage passes to a TAFKAL80ETC concert");
     EXPECT_EQ(13, items[0]->quality);
+}
+
+TEST(GildedRoseTest, backstage_pass_very_close_to_sell_date_max_quality)
+{
+
+    auto items = UpdateQualityForItemWith(1, 49, "Backstage passes to a TAFKAL80ETC concert");
+    EXPECT_EQ(50, items[0]->quality);
+}
+
+
+TEST(GildedRoseTest, backstage_pass_close_to_sell_date_max_quality)
+{
+
+    auto items = UpdateQualityForItemWith(9, 49, "Backstage passes to a TAFKAL80ETC concert");
+    EXPECT_EQ(50, items[0]->quality);
 }
 
 TEST(GildedRoseTest, backstage_pass_very_close_to_sell_date_lower_bound_at_max_quality)
