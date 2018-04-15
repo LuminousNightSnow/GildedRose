@@ -6,21 +6,21 @@ using namespace std;
 
 ostream& operator<<(ostream& s, Item& item)
 {
-    s << item.name << ", " << item.days_remaining << ", " << item.quality;
+    s << item.GetName() << ", " << item.GetDaysRemaining_() << ", " << item.GetQuality();
     return s;
 }
 
 int main()
 {
     ItemContainer items;
-    items.push_back(ItemFactory<NormalItem>(10, 20, "+5 Dexterity Vest"));
-    items.push_back(ItemFactory<AgedBrieItem>(2, 0, "Aged Brie"));
-    items.push_back(ItemFactory<NormalItem>(5, 7, "Elixir of the Mongoose"));
-    items.push_back(ItemFactory<SulfurasItem>(0, 80, "Sulfuras, Hand of Ragnaros"));
-    items.push_back(ItemFactory<SulfurasItem>(-1, 80, "Sulfuras, Hand of Ragnaros"));
-    items.push_back(ItemFactory<BackstageItem>(15, 20, "Backstage passes to a TAFKAL80ETC concert"));
-    items.push_back(ItemFactory<BackstageItem>(10, 49, "Backstage passes to a TAFKAL80ETC concert"));
-    items.push_back(ItemFactory<BackstageItem>(5, 49, "Backstage passes to a TAFKAL80ETC concert"));
+    items.push_back(ItemFactory<NormalItem>("+5 Dexterity Vest", 10, 20));
+    items.push_back(ItemFactory<AgedBrieItem>("Aged Brie", 2, 0));
+    items.push_back(ItemFactory<NormalItem>("Elixir of the Mongoose", 5, 7));
+    items.push_back(ItemFactory<SulfurasItem>("Sulfuras, Hand of Ragnaros", 0, 80));
+    items.push_back(ItemFactory<SulfurasItem>("Sulfuras, Hand of Ragnaros", -1, 80));
+    items.push_back(ItemFactory<BackstageItem>("Backstage passes to a TAFKAL80ETC concert", 15, 20, 50));
+    items.push_back(ItemFactory<BackstageItem>("Backstage passes to a TAFKAL80ETC concert", 10, 49, 50));
+    items.push_back(ItemFactory<BackstageItem>("Backstage passes to a TAFKAL80ETC concert", 5, 49, 50));
     GildedRose app(items);
 
     cout << "OMGHAI!" << endl;

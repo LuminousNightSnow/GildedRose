@@ -1,61 +1,77 @@
 #include "Item.h"
 
-void NormalItem::update()
+void NormalItem::Update()
 {
-    days_remaining -= 1;
-    if (quality == 0)
+    DecreaseDaysRemaining();
+    if (GetQuality() == 0)
     {
         return;
     }
 
-    quality -= 1;
-    if (days_remaining <= 0)
+    DecreaseQuality(1);
+    if (GetDaysRemaining_() <= 0)
     {
-        quality -= 1;
+        DecreaseQuality(1);
     }
 }
 
-void AgedBrieItem::update()
+void AgedBrieItem::Update()
 {
-    days_remaining -= 1;
-    if (quality >= 50)
+    DecreaseDaysRemaining();
+    if (GetQuality() >= 50)
     {
         return;
     }
 
-    quality += 1;
-    if (days_remaining <= 0)
+    IncreaseQuality(1);
+    if (GetDaysRemaining_() <= 0)
     {
-        quality += 1;
+        IncreaseQuality(1);
     }
 }
 
-void SulfurasItem::update()
+void SulfurasItem::Update()
 {
 }
 
-void BackstageItem::update()
+void BackstageItem::Update()
 {
-    days_remaining -= 1;
-    if (days_remaining < 0)
+    DecreaseDaysRemaining();
+    if (GetDaysRemaining_() < 0)
     {
-        quality = 0;
+        SetQualityToMin();
         return;
     }
-    if (quality >= 50)
+    if (GetQuality() >= 50)
     {
         return;
     }
 
-    quality += 1;
+    IncreaseQuality(1);
 
-    if (days_remaining < 10)
+    if (GetDaysRemaining_() < 10)
     {
-        quality += 1;
+        IncreaseQuality(1);
     }
-    if (days_remaining < 5)
+    if (GetDaysRemaining_() < 5)
     {
-        quality += 1;
+        IncreaseQuality(1);
     }
 }
 
+void Item::IncreaseQuality(int value) {
+
+    quality_  = std::min(quality_+= value, max_quality_);
+}
+
+void Item::DecreaseQuality(int value) {
+    quality_ = std::max(quality_ -= value, min_quality_);
+}
+
+void Item::DecreaseDaysRemaining() {
+    days_remaining_ -= 1;
+}
+
+void Item::SetQualityToMin() {
+    quality_ = min_quality_;
+}

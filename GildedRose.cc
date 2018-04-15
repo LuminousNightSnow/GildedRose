@@ -8,7 +8,7 @@ void GildedRose::updateQuality()
 {
     for (auto& item : items)
     {
-        item->update();
+        item->Update();
     }
     return;
 }
