@@ -54,6 +54,14 @@ TEST(GildedRoseTest, normal_item_after_sell_date)
     EXPECT_EQ(8, items[0]->quality);
 }
 
+
+TEST(GildedRoseTest, normal_item_at_sell_date_quality_one)
+{
+
+    auto items = UpdateQualityForItemWith(0, 1);
+    EXPECT_EQ(0, items[0]->quality);
+}
+
 TEST(GildedRoseTest, normal_item_of_zero_quality)
 {
 
