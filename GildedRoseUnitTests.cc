@@ -2,6 +2,41 @@
 
 #include "GildedRose.h"
 
+class ItemTest : public testing::Test
+{
+  protected:
+    ItemPointer UpdateQualityForItem(int sell_in_decrease = 1);
+    virtual void MakeAndUpdateItem(int sell_in_decrease = 1) = 0;
+
+    ItemPointer item_;
+    int days_remaining_;
+    int initial_quality_{10};
+    std::string item_name_;
+};
+
+class NormalItemTest : public ItemTest
+{
+  public:
+    NormalItemTest() { item_name_ = "normal item"; }
+
+  protected:
+    void MakeAndUpdateItem(int sell_in_decrease = 1) override
+    {
+        item_ = ItemFactory<NormalItem>(item_name_, days_remaining_, initial_quality_);
+        UpdateQualityForItem(sell_in_decrease);
+    }
+};
+
+ItemPointer ItemTest::UpdateQualityForItem(int sell_in_decrease)
+{
+    ItemContainer items{item_};
+
+    GildedRose app(items);
+    app.updateQuality();
+    EXPECT_EQ(items[0]->GetDaysRemaining_(), days_remaining_ - sell_in_decrease);
+    return items[0];
+}
+
 ItemContainer UpdateQualityForItemWith(int days_remaining,
                                        int quality,
                                        std::string name = "normal item",
@@ -33,39 +68,41 @@ ItemContainer UpdateQualityForItemWith(int days_remaining,
     return items;
 }
 
-TEST(GildedRoseTest, normal_item_before_sell_date)
+TEST_F(NormalItemTest, normal_item_before_sell_date)
 {
-
-    auto items = UpdateQualityForItemWith(5, 10);
-    EXPECT_EQ(9, items[0]->GetQuality());
+    days_remaining_ = 5;
+    MakeAndUpdateItem();
+    EXPECT_EQ(9, item_->GetQuality());
 }
 
-TEST(GildedRoseTest, normal_item_on_sell_date)
+TEST_F(NormalItemTest, normal_item_on_sell_date)
 {
-
-    auto items = UpdateQualityForItemWith(0, 10);
-    EXPECT_EQ(8, items[0]->GetQuality());
+    days_remaining_ = 0;
+    MakeAndUpdateItem();
+    EXPECT_EQ(8, item_->GetQuality());
 }
 
-TEST(GildedRoseTest, normal_item_after_sell_date)
+TEST_F(NormalItemTest, normal_item_after_sell_date)
 {
-
-    auto items = UpdateQualityForItemWith(-10, 10);
-    EXPECT_EQ(8, items[0]->GetQuality());
+    days_remaining_ = -10;
+    MakeAndUpdateItem();
+    EXPECT_EQ(8, item_->GetQuality());
 }
 
-TEST(GildedRoseTest, normal_item_at_sell_date_quality_one)
+TEST_F(NormalItemTest, normal_item_at_sell_date_quality_one)
 {
-
-    auto items = UpdateQualityForItemWith(0, 1);
-    EXPECT_EQ(0, items[0]->GetQuality());
+    days_remaining_ = 0;
+    initial_quality_ = 1;
+    MakeAndUpdateItem();
+    EXPECT_EQ(0, item_->GetQuality());
 }
 
-TEST(GildedRoseTest, normal_item_of_zero_quality)
+TEST_F(NormalItemTest, normal_item_of_zero_quality)
 {
-
-    auto items = UpdateQualityForItemWith(5, 0);
-    EXPECT_EQ(0, items[0]->GetQuality());
+    days_remaining_ = 5;
+    initial_quality_ = 0;
+    MakeAndUpdateItem();
+    EXPECT_EQ(0, item_->GetQuality());
 }
 
 TEST(GildedRoseTest, brie_before_sell_date)
