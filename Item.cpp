@@ -1,6 +1,6 @@
 #include "Item.h"
 
-void NormalItem::Update()
+void OrdinaryItem::Update()
 {
     DecreaseDaysRemaining();
     DecreaseQuality(1);

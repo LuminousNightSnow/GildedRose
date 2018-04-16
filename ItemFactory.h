@@ -12,4 +12,5 @@ ItemPointer ItemFactory(std::string name, int days_remaining, int quality, int m
 {
     return ItemPointer(new Item_T{name, days_remaining, quality, max_quality});
 }
+
 #endif  // CPP_ITEMFACTORY_H

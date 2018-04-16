@@ -14,9 +14,9 @@ int main()
 {
     const int kBackstageItemMaxQuality = 50;
     ItemContainer items;
-    items.push_back(ItemFactory<NormalItem>("+5 Dexterity Vest", 10, 20));
+    items.push_back(ItemFactory<OrdinaryItem>("+5 Dexterity Vest", 10, 20));
     items.push_back(ItemFactory<AgedBrieItem>("Aged Brie", 2, 0));
-    items.push_back(ItemFactory<NormalItem>("Elixir of the Mongoose", 5, 7));
+    items.push_back(ItemFactory<OrdinaryItem>("Elixir of the Mongoose", 5, 7));
     items.push_back(ItemFactory<SulfurasItem>("Sulfuras, Hand of Ragnaros", 0, 80));
     items.push_back(ItemFactory<SulfurasItem>("Sulfuras, Hand of Ragnaros", -1, 80));
     items.push_back(

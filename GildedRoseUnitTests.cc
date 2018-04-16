@@ -14,15 +14,15 @@ class ItemTest : public testing::Test
     std::string item_name_;
 };
 
-class NormalItemTest : public ItemTest
+class OrdinaryItemTest : public ItemTest
 {
   public:
-    NormalItemTest() { item_name_ = "normal item"; }
+    OrdinaryItemTest() { item_name_ = "normal item"; }
 
   protected:
     void MakeAndUpdateItem(int sell_in_decrease = 1) override
     {
-        item_ = ItemFactory<NormalItem>(item_name_, days_remaining_, initial_quality_);
+        item_ = ItemFactory<OrdinaryItem>(item_name_, days_remaining_, initial_quality_);
         UpdateQualityForItem(sell_in_decrease);
     }
 };
@@ -57,7 +57,7 @@ ItemContainer UpdateQualityForItemWith(int days_remaining,
     }
     else
     {
-        item.reset(new NormalItem{name, days_remaining, quality});
+        item.reset(new OrdinaryItem{name, days_remaining, quality});
     }
 
     ItemContainer items{item};
@@ -68,28 +68,28 @@ ItemContainer UpdateQualityForItemWith(int days_remaining,
     return items;
 }
 
-TEST_F(NormalItemTest, normal_item_before_sell_date)
+TEST_F(OrdinaryItemTest, normal_item_before_sell_date)
 {
     days_remaining_ = 5;
     MakeAndUpdateItem();
     EXPECT_EQ(9, item_->GetQuality());
 }
 
-TEST_F(NormalItemTest, normal_item_on_sell_date)
+TEST_F(OrdinaryItemTest, normal_item_on_sell_date)
 {
     days_remaining_ = 0;
     MakeAndUpdateItem();
     EXPECT_EQ(8, item_->GetQuality());
 }
 
-TEST_F(NormalItemTest, normal_item_after_sell_date)
+TEST_F(OrdinaryItemTest, normal_item_after_sell_date)
 {
     days_remaining_ = -10;
     MakeAndUpdateItem();
     EXPECT_EQ(8, item_->GetQuality());
 }
 
-TEST_F(NormalItemTest, normal_item_at_sell_date_quality_one)
+TEST_F(OrdinaryItemTest, normal_item_at_sell_date_quality_one)
 {
     days_remaining_ = 0;
     initial_quality_ = 1;
@@ -97,7 +97,7 @@ TEST_F(NormalItemTest, normal_item_at_sell_date_quality_one)
     EXPECT_EQ(0, item_->GetQuality());
 }
 
-TEST_F(NormalItemTest, normal_item_of_zero_quality)
+TEST_F(OrdinaryItemTest, normal_item_of_zero_quality)
 {
     days_remaining_ = 5;
     initial_quality_ = 0;
